@@ -5,7 +5,7 @@ class Solution:
         duplicate = []
         maxnum = len(nums)
         
-        for i in range(maxnum*2):
+        for i in range(maxnum*4):
             if count[i] > 1:
                 duplicate.extend([i] * (count[i]-1))
     
