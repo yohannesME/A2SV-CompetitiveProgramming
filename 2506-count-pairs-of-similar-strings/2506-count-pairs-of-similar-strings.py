@@ -1,5 +1,4 @@
 from collections import defaultdict
-from itertools import permutations
 
 class Solution:
     def similarPairs(self, words: List[str]) -> int:
