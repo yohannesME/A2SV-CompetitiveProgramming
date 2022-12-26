@@ -5,7 +5,6 @@ class Solution:
         missing = N*(N+1)/2
         
         #substract all the values in nums and we will find the missing one
-        for num in nums:
-            missing -= num
+        missing -= sum(nums)
         
         return int(missing)
