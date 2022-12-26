@@ -14,14 +14,7 @@ class Solution:
 
         #check if occurence is more than one and add the possible arrangement
         for occur in digits.values():
-            output += self.possiblePair(len(occur))
+            c = len(occur)
+            output += (c*(c-1))/2
 
-        return output
-
-    def possiblePair(self,n):
-
-        result = 0
-        for i in range(1,n):
-            result += i
-
-        return result
+        return int(output)
