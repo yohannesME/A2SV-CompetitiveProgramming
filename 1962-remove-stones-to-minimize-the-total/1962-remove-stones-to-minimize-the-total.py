@@ -1,0 +1,13 @@
+class Solution:
+    def minStoneSum(self, piles: List[int], k: int) -> int:
+        #use negative numbers to change the min heap to a max one
+        piles = [-pile for pile in piles]
+        heapq.heapify(piles)
+        #sort the numbers and decrease the largest one
+        for _ in range(k):
+            value = heapq.heappop(piles)
+            value += -value//2
+            heapq.heappush(piles,value)
+            
+        
+        return -sum(piles)
