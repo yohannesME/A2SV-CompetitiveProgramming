@@ -8,7 +8,7 @@ class Solution:
         
         #calculate the distance and store in a 2d array of the x,y and the distance to origin
         for point in points:
-            dist = abs(point[0]**2 + point[1]**2)
+            dist = math.sqrt(point[0]**2 + point[1]**2)
             distance.append([dist, point])
         
         #create a min heap to store the distances and take the first k closest points
