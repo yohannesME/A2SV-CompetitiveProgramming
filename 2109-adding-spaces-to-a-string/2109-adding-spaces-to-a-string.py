@@ -4,17 +4,15 @@ class Solution:
         string = []
         
         #keep track of the inserted spaces
-        i = 0
+        left = 0
         
-        for index, letter in enumerate(s):
-            #when done adding the space add what is left and break
-            if i == len(spaces):
-                string.append(s[spaces[-1]+1:])
-                break
-            if index == spaces[i]:
-                i += 1
-                string.append(' ' + letter)
-            else:
-                string.append(letter)
+        #add all the spaces and create an array             
+        for right in range(len(spaces)):
+            string.append(s[left:spaces[right]]+' ')
+            left = spaces[right]
         
+        #add the last substring after the space
+        string.append(s[left: len(s)])
+        
+        #create string from the array and submit
         return ''.join(string)
