@@ -2,8 +2,8 @@ class Solution:
     def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
         #diagonal elements
         output = []
-        #           down dig, up dig, to down, to left
-        [downdig, updig, down, left] = [(1,-1), (-1,1), (1,0), (0,1)  ]
+        #           down dig, up dig, to down, to right
+        [downdig, updig, down, right] = [(1,-1), (-1,1), (1,0), (0,1)  ]
         
         x = len(mat)
         y = len(mat[0])
@@ -27,10 +27,10 @@ class Solution:
                     j += updig[1]
                 else:
                     up = False
-                    #move left or down depending on the current position
-                    if not self.outofbound(i+left[0], j+left[1],x,y):
-                        i += left[0]
-                        j += left[1]
+                    #move right or down depending on the current position
+                    if not self.outofbound(i+right[0], j+right[1],x,y):
+                        i += right[0]
+                        j += right[1]
                     else:
                         i += down[0]
                         j += down[1]
@@ -42,13 +42,13 @@ class Solution:
                     j += downdig[1]
                 else:
                     up = True
-                    #move down or left depending on the current position
+                    #move down or right depending on the current position
                     if not self.outofbound(i+down[0], j+down[1],x,y):
                         i += down[0]
                         j += down[1]
                     else:
-                        i += left[0]
-                        j += left[1]               
+                        i += right[0]
+                        j += right[1]               
 
         #add the last element that we used to break out of the while loop
         output.append(mat[i][j])
@@ -58,4 +58,3 @@ class Solution:
     #check if the move makes the index out of bound
     def outofbound(self,i,j, x,y):
         return i >= x or i < 0  or j >= y or j < 0
-          
