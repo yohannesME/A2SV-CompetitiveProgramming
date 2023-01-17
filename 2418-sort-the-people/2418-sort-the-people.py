@@ -8,13 +8,22 @@ class Solution:
         
         for i in range(1,heightSize):
             move = 0
-            for j in range(i-1,-1,-1):
-                if heights[i-move] > heights[j]:
-                    heights[i-move], heights[j] = heights[j], heights[i-move]
-                    names[i-move], names[j] = names[j], names[i-move]     
-                    move += 1
-                else:
-                    break
+            # for j in range(i-1,-1,-1):
+            #     if heights[i-move] > heights[j]:
+            #         heights[i-move], heights[j] = heights[j], heights[i-move]
+            #         names[i-move], names[j] = names[j], names[i-move]     
+            #         move += 1
+            #     else:
+            #         break
+            j = i - 1
+            storeI = i
+            while j >= 0 and heights[i] > heights[j]:
+                heights[i], heights[j] = heights[j], heights[i]
+                names[i], names[j] = names[j], names[i]     
+                i -= 1
+                j -= 1
+            
+            i = storeI
         
         return names
         
