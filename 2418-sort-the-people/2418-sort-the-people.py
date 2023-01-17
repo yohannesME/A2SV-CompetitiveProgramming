@@ -16,14 +16,14 @@ class Solution:
             #     else:
             #         break
             j = i - 1
-            storeI = i
+            # storeI = i
             while j >= 0 and heights[i] > heights[j]:
                 heights[i], heights[j] = heights[j], heights[i]
                 names[i], names[j] = names[j], names[i]     
                 i -= 1
                 j -= 1
             
-            i = storeI
+            # i = storeI
         
         return names
         
