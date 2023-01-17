@@ -5,10 +5,10 @@ class Solution:
         
         heightSize = len(heights)
         for i in range(heightSize):
-            for j in range(i,heightSize):
-                if heights[i] < heights[j]:
-                    heights[i], heights[j] = heights[j], heights[i]
-                    names[i], names[j] = names[j], names[i]
-        
+            for j in range(0,heightSize-1):
+                if heights[j] < heights[j+1]:
+                    heights[j], heights[j+1] = heights[j+1], heights[j]
+                    names[j+1], names[j] = names[j], names[j+1]
+
         return names
             
