@@ -15,11 +15,11 @@ class Solution:
         leftBound = 0
         rightBound = N-1
         
-        print(lastIndexHash)
-        
         #move from the left
         while leftBound < N:
-            #check the last index of current index occurance
+            #check the last index of current index occurance to the left most of all the elements it contain if that is the case then take the size of that sub array 
+            #a - 0 -- first occurance
+            #a - 7 -- last occurane in the middle if there is a value greater index occurance then change that right bound to that index and keep on moving
             if leftBound < lastIndexHash[s[leftBound]]:
                 rightBound = lastIndexHash[s[leftBound]]
                 start = leftBound
