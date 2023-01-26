@@ -38,7 +38,7 @@ class Solution:
             merged.append(word1[index])
             index += 1
 
-        
+        #if the first array ends first add the remaining element to the merge
         if word2ptr < size2:
             merged += word2[word2ptr:]
             
