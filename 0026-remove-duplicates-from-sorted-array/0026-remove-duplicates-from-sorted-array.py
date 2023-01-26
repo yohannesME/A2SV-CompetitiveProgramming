@@ -1,19 +1,24 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        #create a num array that stores repeated value index
-        repeatedNum = []
-    
-        #add the repeated value to num
-        for i in range(0, len(nums)-1):
-            if(nums[i]==nums[i+1]):
-                repeatedNum.append(i)
-            else:
-                continue
+        #create a temp variable to store the last repeated value
+        repeated = nums[0]
+        N = len(nums)
         
-        #pop the repeated element
-        for i in range(len(repeatedNum)):
-            #decrease by i as pop will decrease the array by one size
-            nums.pop(repeatedNum[i]-i)
+        countRepeated = 1
         
-        return len(nums)
+        repeatedIndex = 1
+        lookahead = 1
+        
+        while repeatedIndex < N and lookahead < N:
+            while lookahead < N and nums[lookahead] == repeated:
+                lookahead += 1
+            
+            if lookahead < N:
+                countRepeated += 1
+                nums[repeatedIndex] = nums[lookahead]
+                repeatedIndex += 1
+                repeated = nums[lookahead]
+                
+        
+        return countRepeated
         
