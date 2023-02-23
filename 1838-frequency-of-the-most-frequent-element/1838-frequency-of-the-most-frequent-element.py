@@ -1,17 +1,28 @@
 class Solution:
     def maxFrequency(self, nums: List[int], k: int) -> int:
+        #sort the array
         nums.sort()
+        N = len(nums)
         
-        left, right = 0,0
-        total, result = 0,0
+        #our bounds and total as our prefix sum
+        leftBound = 0
+        rightBound = 0
+        total = 0
+        frequency = 0
         
-        while right < len(nums):
-            total += nums[right]
+        
+        while rightBound < N:
+            #add the total number value
+            total += nums[rightBound]
             
-            while nums[right]*(right-left+1) >total + k:
-                total -= nums[left]
-                left += 1
-            result = max(result, (right-left+1))
-            right += 1
-        return result
+            #if total + k is less than current value * the window size then we decrease the window
+            while nums[rightBound]*(rightBound-leftBound+1) >total + k:
+                total -= nums[leftBound]
+                leftBound += 1
+                
+            #update frequency
+            frequency = max(frequency, (rightBound-leftBound+1))
+            rightBound += 1
+        
+        return frequency
         
