@@ -16,7 +16,7 @@ class Solution:
         
         #move the window and calculate the average
         while leftBound < N and rightBound < N:
-            maxAvg = max(maxAvg, subArrSum/k)
+            maxAvg = max(maxAvg, subArrSum)
             subArrSum -= nums[leftBound]
             leftBound += 1
             rightBound += 1
@@ -26,5 +26,5 @@ class Solution:
             
             
         
-        return maxAvg
+        return maxAvg/k
         
