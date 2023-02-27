@@ -1,14 +1,25 @@
-class Solution(object):
-    def evalRPN(self, tokens):
-        stack = []
-        for t in tokens:
-            if t.lstrip('-+').isdigit():
-                print(int(t))
-                stack[:0] = [int(t)]
-            else:
-                temp = eval(str(stack[1])+t+str(stack[0])+".0")
-                del stack[0]
-                del stack[0]
-                stack[:0] = [int(temp)]
-        return stack[0]
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack=[]
+        val1=0
+        val2=0
         
+        for i in range(len(tokens)):
+            if tokens[i]=='+':
+                stack.append(stack.pop()+stack.pop())
+            elif tokens[i]=='-':
+                val2=stack.pop()
+                val1=stack.pop()
+                stack.append(val1-val2)
+            elif tokens[i]=='*':
+                stack.append(stack.pop()*stack.pop())
+                
+            elif tokens[i]=='/':
+                val2=stack.pop()
+                val1=stack.pop()
+                stack.append(int(val1/val2))
+            else:
+                stack.append(int(tokens[i])) 
+                        
+                    
+        return stack.pop()
