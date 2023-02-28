@@ -1,11 +1,8 @@
 class Solution:
     def fib(self, n: int) -> int:
-        if n == 0:
-            return 0
-        lagging = 0
-        fast = 1
-        for i in range(n-1):
-            fast += lagging
-            lagging = fast - lagging
-        return fast
+        if n == 0 or n == 1:
+            return n
+        else:
+            return self.fib(n-1) + self.fib(n-2)
+        
         
