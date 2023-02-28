@@ -7,5 +7,3 @@ class Solution:
             reverse(left+1, right-1)
         
         reverse(0, len(s)-1)
-        return s
-
