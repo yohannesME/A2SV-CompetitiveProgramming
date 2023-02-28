@@ -7,7 +7,7 @@ class DataStream:
 
     def consec(self, num: int) -> bool:
         self.data.append(num)
-        # we have a difference variable to hold the last straying variable and calculate from that point if have enough lenght which is k to return true
+        # we clear the array when we encounter different value then value, hence use the length to check
         if num != self.value:
             self.data = []
             return False
