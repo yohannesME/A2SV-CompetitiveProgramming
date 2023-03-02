@@ -12,5 +12,7 @@ class Solution:
 
             if index < N:
                 mStack.append(index)
+            elif not mStack:
+                break
 
         return output
