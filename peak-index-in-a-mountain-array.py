@@ -10,4 +10,4 @@ class Solution:
             else:
                 right = mid
 
-        return left if arr[left] > arr[right] else right
+        return left
