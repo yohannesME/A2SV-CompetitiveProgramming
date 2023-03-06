@@ -19,7 +19,3 @@ class Solution:
                 return k
             else:
                 return arr[right-1] + k - (arr[right-1] - right )
-
-
-        
-        return right
