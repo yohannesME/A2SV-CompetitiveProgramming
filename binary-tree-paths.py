@@ -7,20 +7,14 @@
 class Solution:
     def traverse(self, root):
         if not root:
-            return
+            return []
         if not root.left and not root.right:
             return [[str(root.val)]]
         
         left = self.traverse(root.left)
         right = self.traverse(root.right)
-        newPath = []
-
-        if left and right:
-            newPath = left + right
-        elif left:
-            newPath = left
-        elif right:
-            newPath = right
+        
+        newPath = left + right
 
         for path in newPath:
             path.append(str(root.val))
