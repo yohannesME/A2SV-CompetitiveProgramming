@@ -1,28 +1,16 @@
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        #create a adjacecy list from the adjacecy matrix
-        adjList = defaultdict(set)
-        n = len(isConnected)
-
-        for i in range(n):
-            for j in range(i,n):
-                if isConnected[i][j]:
-                    adjList[i].add(j)
-                    adjList[j].add(i)
-
         #keep track of the visited and also the componens
         visited = set()
         ans = 0
+        n = len(isConnected)
 
         #use dfs to traverse as much as possible to check each sub routes
         def dfs(node):
-            if node in visited:
-                return
-
-            visited.add(node)
-
-            for val in adjList[node]:
-                dfs(val)
+            for neighbour in range(n):
+                if isConnected[node][neighbour] and neighbour not in visited:
+                    visited.add(neighbour)
+                    dfs(neighbour)
         
         #if there are disconnected conmponenets count each and update our answer and traverse each one
         for i in range(n):
