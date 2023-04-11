@@ -9,14 +9,13 @@ class Solution:
             for j in range(i+1, N):
                 #if the distance of the center is between the two radius then we can say that they intercept. hence create graph of node connected 
                 distance = sqrt((bombs[i][0]-bombs[j][0])**2 + (bombs[i][1]-bombs[j][1])**2)
-
+                #then the bomb is in the radius if it is greater or equal to distance between the two centers
                 if bombs[i][2] >= distance:
                     adjList[i].add(j)
                 if bombs[j][2] >= distance:
                     adjList[j].add(i)
 
-        print(adjList)
-        #now the actual work is finding the maximum connected graph length
+        #now the actual work is finding the maximum connected graph length directed Graph
         def dfs(node, visited):
 
             if node in visited:
