@@ -1,52 +1,29 @@
-class TreeNode:
-    def __init__(self, name):
-        self.name = name
-        self.children = []
-        self.isAlive = True
-
 class ThroneInheritance:
     def __init__(self, kingName: str):
-        self.royalFamily = TreeNode(kingName)
-        self.memo = defaultdict(TreeNode)
-        self.memo[kingName] = self.royalFamily
-
-    #get a node by traversing and return it
-    def dfs(self,root, nodeName):
-        if root.name == nodeName:
-            return root
-
-        
-        for children in root.children:
-            node = self.dfs(children, nodeName)
-            if node:
-                return node
-                
+        self.kingName = kingName
+        self.royalFamily = defaultdict(list)
+        self.dead = set()            
 
     #get the parent and add it as a child for that parent 
     def birth(self, parentName: str, childName: str) -> None:
-        child = TreeNode(childName)
-        self.memo[childName] = child
-        self.memo[parentName].children.append(child)
+        self.royalFamily[parentName].append(childName)
 
-    #mark the isAlive Flag False for that node
+    #add to the dead family list
     def death(self, name: str) -> None:
-        self.memo[name].isAlive = False
+        self.dead.add(name)
 
     #Generate all successors if they are alive
     def getInheritanceOrder(self) -> List[str]:
         successors = []
+        
+        def dfs(node):
+            if node not in self.dead:
+                successors.append(node)
 
-        def dfs(root):
-            if not root:
-                return 
-
-            if root.isAlive:
-                successors.append(root.name)
-
-            for children in root.children:
+            for children in self.royalFamily[node]:
                 dfs(children)
         
-        dfs(self.royalFamily)
+        dfs(self.kingName)
         return successors
 
 
