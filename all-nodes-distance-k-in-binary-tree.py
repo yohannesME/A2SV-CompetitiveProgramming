@@ -13,55 +13,33 @@ class Solution:
         if k == 0:
             return [target.val]
         
-        output = []
-
-        def calcDistance(root, target, k):
+        #let's change the tree to a graph
+        adjList = defaultdict(list)
+        def treeToGraph(root):
+            if root.left:
+                adjList[root.left.val].append(root.val)
+                adjList[root.val].append(root.left.val)
+                treeToGraph(root.left)
             
-            nonlocal output
-            if not root:
-                return []
-            
-            left = calcDistance(root.left, target,k)
-            right = calcDistance(root.right, target,k)
-            if not left and not right:
-                #update the distance if we find the target to be edge
-                if root.val == target:
-                    return 1
-                return [[root.val]]
-            
-            #arrays is returned and create a new array with merged and updated values
-            if type(left) == type(right):
-                newDistance = [[root.val]]
-                if len(left) < len(right):
-                    for index,val in enumerate(left):
-                        right[index] += val
-                    newDistance += right
-                else:
-                    for index,val in enumerate(right):
-                        left[index] += val
-                    newDistance += left
+            if root.right:
+                adjList[root.right.val].append(root.val)
+                adjList[root.val].append(root.right.val)
+                treeToGraph(root.right)
+        
+        treeToGraph(root)
+        
+        #NOW LET'S USE BFS TO FIND THE KTH DISTANCE ELEMENTS
+        queue = deque([target.val])
+        visited = set([target.val])
+        for _ in range(k):
+            for _ in range(len(queue)):
+                node = queue.popleft()
 
-                #check if target
-                if root.val == target:
-                    if len(newDistance) > k:
-                        output += newDistance[k]
-                    return 1
-                else:
-                    return newDistance
-            #if one of the values is the distance then check if k is present by substracting distance
-            elif type(left) == type([]):
-                newDistance = [[root.val]]+left
-                #calculate the distance
-                if len(newDistance) > k-right and k >= right:
-                    output += newDistance[k-right]
-                return right+1
-
-            elif type(right) == type([]):
-                newDistance = [[root.val]]+right
-                #calculate the distance
-                if len(newDistance) > k-left and k >= left:
-                    output += newDistance[k-left]
-                
-                return left + 1
-        calcDistance(root, target.val,k)
-        return output
+                for child in adjList[node]:
+                    if child in visited:
+                        continue
+                    
+                    visited.add(child)
+                    queue.append(child)
+        
+        return list(queue)
