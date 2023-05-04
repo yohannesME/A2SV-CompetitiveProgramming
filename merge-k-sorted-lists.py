@@ -4,23 +4,31 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-            #merge two sorted list
-    def sortedListMerge(self,list1, list2):
-        dummy = cur = ListNode(0)
-        while list1 and list2:
-            if list1.val < list2.val:
-                cur.next = list1
-                list1 = list1.next
-            else:
-                cur.next = list2
-                list2 = list2.next
-            cur = cur.next
-        cur.next = list1 or list2
-        return dummy.next
-
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        merged = None
-        for li in lists:
-            merged = self.sortedListMerge(li, merged)
+        # let's input list of lined list to the heap
+        heap = []
+        ans = ListNode()
+        head = ans
+
+        for index, sortedList in enumerate(lists):
+            if sortedList:
+                heap.append((sortedList.val,index, sortedList))
+
+        # Create a heap Structure
+        heapify(heap)
         
-        return merged
+        # While there is element in the heap
+        while heap:
+            #pop the value,  identification , and linked list that is minimum
+            val , index , node = heappop(heap)
+            # Concatenate to our answer
+            head.next = node
+            head = head.next
+            node = node.next
+
+            # Add the Adjacent Value to the heap if any
+            if node:
+                heappush(heap, (node.val , index ,  node))
+
+        # Using the Dummy we set as Answer we Anwer
+        return ans.next
