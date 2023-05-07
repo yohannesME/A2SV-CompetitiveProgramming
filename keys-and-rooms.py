@@ -1,6 +1,6 @@
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
-        queue = rooms[0][:]
+        queue = rooms[0]
         visited = set([0])
 
         while queue:
