@@ -11,21 +11,6 @@ class Solution:
             graph[v1].append(v2)
             graph[v2].append(v1)
         
-        # def dfs(node, visited=set()):
-        #     if node in visited:
-        #         return
-            
-        #     visited.add(node)
-        #     ans.append(node)
-            
-        #     if node in graph:
-        #         for neighbour in graph[node]:
-        #             dfs(neighbour)
-        
-        # #recursion limit make it 2000
-        # sys.setrecursionlimit(10000)   
-        # #also improve the stack
-        # threading.stack_size(2**27)   
         for key in values:
             if len(graph[key]) == 1:
                 stack = [key]
@@ -36,7 +21,6 @@ class Solution:
                         visited.add(val)
                         ans.append(val)
                         for neighbour in graph[val]:
-                            stack.append(neighbour)              
-                        
-                # dfs(key)
+                            stack.append(neighbour)
+                            
                 return ans
